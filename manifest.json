@@ -1,0 +1,43 @@
+{
+    "name": "Text Helper",
+    "action": {},
+    "manifest_version": 3,
+    "version": "0.1",
+    "description": "",
+    "permissions": [
+        "activeTab",
+        "scripting"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "js": [
+                "src/libs/jquery-3.6.3.min.js",
+                "src/functions.js",
+                "src/components/menu-icon/menu-icon.js",
+                "src/components/menu-text-tools/menu-text-tools.js",
+                "src/components/popup-result/popup-result.js",
+                "src/apps.js"
+            ],
+            "css": [
+                "src/components/menu-icon/menu-icon.css",
+                "src/components/menu-text-tools/menu-text-tools.css",
+                "src/components/popup-result/popup-result.css"
+            ],
+            "matches": [
+                "*://*/*"
+            ]
+        }
+    ],
+    "web_accessible_resources": [{
+        "matches": [
+            "*://*/*"
+        ],
+        "resources": [
+            "img/xth-icon.png",
+            "img/xth-icon-32.png",
+            "img/xth-icon-64.png"]
+    }]
+}

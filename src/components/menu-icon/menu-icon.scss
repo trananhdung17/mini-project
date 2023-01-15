@@ -1,0 +1,12 @@
+.xth-menu-icon {
+    display: none;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    cursor: pointer;
+    box-shadow: 1px 2px 6px 0px rgba(0, 0, 0, 0.8);
+    border-radius: 16px;
+    &:hover {
+        box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.8);
+    }
+}
