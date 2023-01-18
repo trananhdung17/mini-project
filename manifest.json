@@ -1,6 +1,14 @@
 {
     "name": "Text Helper",
-    "action": {},
+    "icons": {
+        "16": "icons/xth-icon-16.png",
+        "32": "icons/xth-icon-32.png",
+        "48": "icons/xth-icon-48.png",
+        "128": "icons/xth-icon-128.png"
+    },
+    "action": {
+        "default_popup": "popup/popup.html"
+      },
     "manifest_version": 3,
     "version": "0.1",
     "description": "",
@@ -24,7 +32,8 @@
             "css": [
                 "src/components/menu-icon/menu-icon.css",
                 "src/components/menu-text-tools/menu-text-tools.css",
-                "src/components/popup-result/popup-result.css"
+                "src/components/popup-result/popup-result.css",
+                "popup/popup.css"
             ],
             "matches": [
                 "*://*/*"

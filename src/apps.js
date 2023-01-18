@@ -4,33 +4,40 @@ $(function(){
     MenuIcon.init();
     ResultPopup.init();
 
-    // $('input').focus((e) => {
-    //     /**
-    //      * 
-    //      */
-    //     MenuIcon.init(e.target);
-    //     MenuIcon.show({
-    //         top: '100px',
-    //         left: '300px'
-    //     })
-    // })
-    // $('textarea').focus((e) => {
-    //     /**
-    //      * 
-    //      */
-    //     MenuIcon.init(e.target);
-    //     MenuIcon.show({
-    //         top: '100px',
-    //         left: '300px'
-    //     })
-    // })
+    $('input').focus((e) => {
+        /**
+         * 
+         */
+        console.log('forcus input');
+        MenuIcon.init(e.target);
+        var {x, y, width, height} = e.target.getClientRects()[0]
+        MenuIcon.show({
+            top: `${y + height}px`,
+            left: `${x + width}px`
+        })
+    });
+
+    $('textarea').focus((e) => {
+        /**
+         * 
+         */
+        console.log('forcus textarea');
+        MenuIcon.init(e.target);
+        var {x, y, width, height} = e.target.getClientRects()[0]
+        MenuIcon.show({
+            top: `${y + height}px`,
+            left: `${x + width}px`
+        })
+    })
 
 
     $(document).bind('mouseup', function(e){
         /**
          * 
          */
-        MenuIcon.hide();
+        if (MenuIcon.isShow() && e.target.tagName != 'INPUT' && e.target.tagName != 'TEXTAREA' && e.target.className != 'xth-menu-icon'){
+            MenuIcon.hide();
+        }
 
         var text_selected = getSelectedText();
         if (text_selected) {
@@ -40,20 +47,5 @@ $(function(){
                 left: `${e.pageX}px`
             });
         }
-        // $(document).unbind('mouseup');
-
-        // closeMenu();
-        // var text_selected;
-        
-        // if (window.getSelection) {
-        //     text_selected = window.getSelection().toString();
-        // } else if (document.selection) {
-        //     text_selected = document.selection.createRange().toString();
-        // }
-
-        // if (text_selected && text_selected !== '') {
-        //     console.log(`Text was selected at ${e.pageX}:${e.pageY}:`, text_selected);
-        //     showMenu(text_selected, {top: e.clientY, left: e.clientX});
-        // }
     });
 });

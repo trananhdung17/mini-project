@@ -4,6 +4,7 @@ var MenuIcon = {
     _position: null,
     _input: null,
     _text: null,
+    // _isShow: false,
     init: function (input, text) {
         this._input = input;
         this._text = text;
@@ -14,7 +15,7 @@ var MenuIcon = {
         this.$el = $(this.template);
         this.$el.css({"background": `url('${chrome.runtime.getURL('img/xth-icon-32.png')}')`})
         this.$el.click(() => {
-            TextToolsMenu.init(this._input);
+            TextToolsMenu.init(this._input, this._text);
             TextToolsMenu.show({...this._position});
             this.hide();
         });
@@ -23,11 +24,15 @@ var MenuIcon = {
     },
     show: function (position) {
         this._position = position;
-        // var {top, left} = position;
         this.$el.css({...position});
+        // this._isShow = true;
         this.$el.show();
     },
     hide: function () {
+        // this._isShow = false;
         this.$el.hide();
+    },
+    isShow: function() {
+        return this.$el.is(":visible");
     }
 }

@@ -2,7 +2,7 @@ var ResultPopup = {
     template: `
     <div class='xth-popup-result'>
         <div class="xth-close"></div>
-        <h3>Result:</h3>
+        <h2 class="xth-title">Result:</h2>
         <div class="xth-result"></div>
     </div>`,
     $el: null,
@@ -19,7 +19,8 @@ var ResultPopup = {
             this.hide();
         });
     },
-    show: function (text) {
+    show: function (title, text) {
+        this.$el.find('.xth-title').html(title);
         this.$el.find('.xth-result').html(text);
         this.$el.show();
     },

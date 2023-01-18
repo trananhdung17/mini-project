@@ -1,3 +1,4 @@
+const API_TOKEN = "c05a759a92c012c2efac10dfb79e45b1e49abfbd";
 
 function getSelectedText() {
     console.log('Getting selected text...');
@@ -22,23 +23,19 @@ function countWords(text){
     return text.split(' ').filter(function(str){return str!="";}).length;
 };
 
-async function summaryText(text, model) {
+async function summaryText(text, model='fast-gpt-j') {
     /**
      * Summary text
      * Using `Fast GPT-J` model on NLP Cloud. See more: https://docs.nlpcloud.com/#summarization
      * Available models: ['bart-large-cnn', 'fast-gpt-j', 'finetuned-gpt-neox-20b']
      */
 
-    if (!model) {
-        model = 'fast-gpt-j';
-    }
-
     var settings = {
         "url": `https://api.nlpcloud.io/v1/gpu/${model}/summarization`,
         "method": "POST",
         "timeout": 0,
         "headers": {
-          "Authorization": "Bearer c05a759a92c012c2efac10dfb79e45b1e49abfbd",
+          "Authorization": "Token " + API_TOKEN,
           "Content-Type": "application/json"
         },
         "data": JSON.stringify({
@@ -51,23 +48,19 @@ async function summaryText(text, model) {
       });
 }
 
-async function generateText(requirement, max_length, model) {
+async function generateText(requirement, max_length=500, model='fast-gpt-j') {
     /**
      * Auto generate text by given original text
      * Using `Fast GPT-J` model on NLP Cloud. See more: https://docs.nlpcloud.com/#generation
      * Available models: ['fast-gpt-j', 'gpt-j', 'gpt-neox-20b', 'finetuned-gpt-neox-20b']
      */
-
-    if (!model) {
-        model = 'fast-gpt-j';
-    }
     
     var settings = {
         "url": `https://api.nlpcloud.io/v1/gpu/${model}/generation`,
         "method": "POST",
         "timeout": 0,
         "headers": {
-          "Authorization": "Token c05a759a92c012c2efac10dfb79e45b1e49abfbd",
+          "Authorization": "Token " + API_TOKEN,
           "Content-Type": "application/json"
         },
         "data": JSON.stringify({
@@ -79,4 +72,49 @@ async function generateText(requirement, max_length, model) {
       return $.ajax(settings).done(function (response) {
         console.log(response);
       });
+}
+
+async function correctText(text, model='fast-gpt-j') {
+  /**
+   * Available models: finetuned-gpt-neox-20b, fast-gpt-j, gpt-j
+   */
+  var settings = {
+    "url": `https://api.nlpcloud.io/v1/gpu/${model}/gs-correction`,
+    "method": "POST",
+    "timeout": 0,
+    "headers": {
+      "Authorization": "Token " + API_TOKEN,
+      "Content-Type": "application/json"
+    },
+    "data": JSON.stringify({
+      "text": text
+    }),
+  };
+  
+  return $.ajax(settings).done(function (response) {
+    console.log(response);
+  });
+}
+
+async function parapharaseText(text, model='fast-gpt-j') {
+  
+  /**
+   * Available models: finetuned-gpt-neox-20b, fast-gpt-j, gpt-j
+   */
+  var settings = {
+    "url": `https://api.nlpcloud.io/v1/gpu/${model}/paraphrasing`,
+    "method": "POST",
+    "timeout": 0,
+    "headers": {
+      "Authorization": "Token " + API_TOKEN,
+      "Content-Type": "application/json"
+    },
+    "data": JSON.stringify({
+      "text": text
+    }),
+  };
+  
+  return $.ajax(settings).done(function (response) {
+    console.log(response);
+  });
 }
